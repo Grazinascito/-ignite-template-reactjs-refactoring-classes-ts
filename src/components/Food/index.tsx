@@ -5,7 +5,9 @@ import api from "../../services/api";
 import { useEffect, useState } from "react";
 
 const Food = ({ food, handleDelete, handleEditFood }) => {
-  const [isAvailable, setIsAvailable] = useState(food.available);
+
+
+  const [isAvailable, setIsAvailable] = useState<boolean>(food.available);
 
   const handleUpdateFood = async () => {
     await api.put(`/foods/${food.id}`, {
@@ -16,7 +18,7 @@ const Food = ({ food, handleDelete, handleEditFood }) => {
 
   useEffect(() => {
     handleUpdateFood();
-  }, []);
+  }, [isAvailable]);
 
   const toggleAvailable = () => {
     setIsAvailable((prevState) => !prevState);
